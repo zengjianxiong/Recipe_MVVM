@@ -1,0 +1,111 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName build_versions.verion_name
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+}
+
+dependencies {
+    api  fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation deps.test_runner
+
+    //Junit Testing
+    androidTestImplementation deps.junit
+
+    // Espresso UI Testing
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation deps.espresso.intents
+
+    // Resolve conflicts between main and test APK:
+    androidTestImplementation deps.support.annotations
+    androidTestImplementation deps.support.v4
+    androidTestImplementation deps.support.app_compat
+    androidTestImplementation deps.support.design
+    androidTestImplementation deps.support.core_utils
+
+    // Support libraries
+    api deps.support.app_compat
+    api deps.support.v4
+    api deps.support.design
+    api deps.support.cardview
+    api deps.support.recyclerview
+    api deps.support.core_utils
+
+    // Architecture components
+    api deps.lifecycle.runtime
+    api deps.lifecycle.extensions
+    annotationProcessor deps.lifecycle.compiler
+
+    //Constraint_layout
+    api deps.constraint_layout
+
+    //rxjava and rxandroid
+    api deps.rx.rxjava
+    api deps.rx.rxandroid
+
+    //rxpermissions
+    api deps.rxpermissions
+
+    //retrofit
+    api deps.retrofit.runtime
+    api deps.retrofit.gson
+    api deps.retrofit.rxjava2
+    api deps.retrofit.okhttp_logging_interceptor
+    api deps.retrofit.okhttp
+
+    //glide
+    api deps.glide.runtime
+    annotationProcessor deps.glide.compiler
+
+    //apollo recently we use event_bus
+//    api deps.apollo.core
+//    annotationProcessor deps.apollo.compiler
+
+    //arouter
+    api deps.arouter.api
+    annotationProcessor deps.arouter.compiler
+
+    //event_bus
+    api deps.event_bus.api
+    annotationProcessor deps.event_bus.compiler
+
+}
+
+

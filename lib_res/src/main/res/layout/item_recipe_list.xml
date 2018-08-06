@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickHandler"
+            type="com.recipe_mvvm.zfl.lib_res.widget.adapter.OnClickHandler"/>
+
+        <variable
+            name="recipeInfo"
+            type="com.recipe_mvvm.zfl.lib_base.recipe_entity.RecipeInfo"/>
+
+        <variable
+            name="labelNum"
+            type="int"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{clickHandler::onRootClick}"
+        >
+
+        <ImageView
+            android:id="@+id/ivRecipeListItemThumbnail"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:onClick="@{clickHandler::onChildClick}"
+            app:roundBorderImage="@{recipeInfo.thumbnail}"
+            />
+
+        <TextView
+            android:id="@+id/tvRecipeListItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ivRecipeListItemThumbnail"
+            android:layout_toRightOf="@id/ivRecipeListItemThumbnail"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@{recipeInfo.name}"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/llRecipeListItemLabelArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ivRecipeListItemThumbnail"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            app:addLabelView="@{recipeInfo}"
+            app:labelNum="@{labelNum}"
+            >
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorPrimary"/>
+
+    </RelativeLayout>
+
+
+</layout>

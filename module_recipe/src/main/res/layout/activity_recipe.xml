@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dlRecipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start"
+        >
+
+        <include
+            android:id="@+id/include_recipe_content"
+            layout="@layout/activity_recipe_content" />
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nvRecipeCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/menu_recipe_category"
+            app:headerLayout="@layout/header_recipe_nav"
+            >
+
+        </android.support.design.widget.NavigationView>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</layout>

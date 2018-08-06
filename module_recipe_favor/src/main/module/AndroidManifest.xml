@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.recipe_mvvm.zfl.module_recipe_favor">
+
+    <application
+        android:theme="@style/AppTheme">
+        <activity android:name=".RecipeFavorActivity">
+        </activity>
+    </application>
+
+</manifest>

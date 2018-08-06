@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="clickHandler"
+            type="com.recipe_mvvm.zfl.lib_res.widget.adapter.OnClickHandler"/>
+
+        <variable
+            name="bgUrl"
+            type="String"/>
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways"
+                >
+
+
+                <ImageView
+                    android:id="@+id/ivRecipeDetailBg"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/main_bg_default5"
+                    app:imageUrl="@{bgUrl}"
+                    />
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tbRecipeDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    >
+
+
+                    <ImageView
+                        android:id="@+id/ivRecipeCollect"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="17dp"
+                        android:src="@mipmap/menu_uncollect"
+                        android:onClick="@{clickHandler::onChildClick}"
+                        />
+
+
+                </android.support.v7.widget.Toolbar>
+
+
+
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <!-- TODO 以后还要添加两侧的箭头 -->
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpRecipeMethod"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </android.support.v4.view.ViewPager>
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        applicationId "com.zfl.recipe_mvvm"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName build_versions.verion_name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName(), eventBusIndex: 'com.recipe_mvvm.zfl.RecipeIndex']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':lib_base')
+
+    implementation project(':lib_res')
+
+    implementation project(':BGALibrary')
+
+    if (isNeedModuleAbout.toBoolean()) {
+        implementation project(':module_recipe_about')
+    }
+    if (isNeedModuleDetail.toBoolean()) {
+        implementation project(':module_recipe_detail')
+    }
+    if (isNeedModuleFavor.toBoolean()) {
+        implementation project(':module_recipe_favor')
+    }
+    //编译时运行处理声明
+//    annotationProcessor deps.apollo.compiler //now we use event_bus
+    annotationProcessor deps.arouter.compiler
+    annotationProcessor deps.lifecycle.compiler
+    annotationProcessor deps.glide.compiler
+    annotationProcessor deps.event_bus.compiler
+}
