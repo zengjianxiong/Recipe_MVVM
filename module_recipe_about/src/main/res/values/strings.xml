@@ -8,7 +8,7 @@
         \n\n 3、网络Json数据请求方面，使用了开源框架retrofit 框架地址：https://github.com/square/retrofit
         \n\n 4、图片请求方面，使用的是开源框架Glide。框架地址：https://github.com/bumptech/glide
         \n\n 5、因为涉及到网络请求和本地IO数据处理，使用的是优秀的异步处理框架RxJava。框架地址：https://github.com/ReactiveX/RxJava
-        \n\n 6、使用了基于编译时注解的事件处理的RxBus框架Apollo，可以避免大量handler和本地广播的代码出现 框架地址：https://github.com/lsxiao/Apollo
+        \n\n 6、使用了EventBus，可以避免大量handler和本地广播的代码出现 框架地址：https://github.com/greenrobot/EventBus
         \n\n 7、使用了BGARefreshLayout框架，来处理下拉刷新，上拉加载更多的事件。框架地址：https://github.com/bingoogolapple/BGARefreshLayout-Android
         \n\n 8、使用了阿里云的ARouter框架，进行组件化开发。框架地址：https://github.com/alibaba/ARouter
         \n\n 9、使用了Google的LifeCycle框架来监听Activity的生命周期
