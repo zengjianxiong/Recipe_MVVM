@@ -1,5 +1,7 @@
 package com.recipe_mvvm.zfl.module_recipe_detail.fragment;
 
+import android.text.TextUtils;
+
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseFragment;
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseViewModel;
 import com.recipe_mvvm.zfl.lib_base.recipe_entity.recipe_detail.RecipeDetailBean;
@@ -29,7 +31,9 @@ public class RecipeDetailMainFragment extends BaseFragment<BaseViewModel, Fragme
         mViewDataBinding.tvRecipeDetailTitle.setText(mDetailBean.result.recipe.title);
         mViewDataBinding.tvRecipeDetailSummary.setText("简介：" + mDetailBean.result.recipe.sumary);
         //去除多余字符
-        mViewDataBinding.tvRecipeDetailIngredients.setText("食材：" + mDetailBean.result.recipe.ingredients.replace("[\"", "").replace("\"]", ""));
+        if (!TextUtils.isEmpty(mDetailBean.result.recipe.ingredients)) {
+            mViewDataBinding.tvRecipeDetailIngredients.setText("食材：" + mDetailBean.result.recipe.ingredients.replace("[\"", "").replace("\"]", ""));
+        }
         //插入标签
         String[] labels = mDetailBean.result.ctgTitles.split(",");
         for (int i = 0; i < labels.length; i++)
