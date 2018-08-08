@@ -12,7 +12,7 @@
 
 5、因为涉及到网络请求和本地IO数据处理，使用的是优秀的异步处理框架RxJava。框架地址：https://github.com/ReactiveX/RxJava
 
-6、使用了EventBus，可以避免大量handler和本地广播的代码出现 框架地址：https://github.com/greenrobot/EventBus
+6、使用了Apollo，可以避免大量handler和本地广播的代码出现 框架地址：https://github.com/lsxiao/Apollo
 
 7、使用了BGARefreshLayout框架，来处理下拉刷新，上拉加载更多的事件。框架地址：https://github.com/bingoogolapple/BGARefreshLayout-Android
 
