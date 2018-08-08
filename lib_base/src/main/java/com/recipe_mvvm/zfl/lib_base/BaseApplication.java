@@ -3,7 +3,10 @@ package com.recipe_mvvm.zfl.lib_base;
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.lsxiao.apollo.core.Apollo;
 import com.recipe_mvvm.zfl.lib_base.request.RetrofitClient;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * @Description 基础的Application类
@@ -22,6 +25,6 @@ public class BaseApplication extends Application
         }
         ARouter.init(this);
         RetrofitClient.init(this);
-
+        Apollo.init(AndroidSchedulers.mainThread(), this);
     }
 }

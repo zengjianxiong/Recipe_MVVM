@@ -94,7 +94,9 @@ dependencies {
     api deps.glide.runtime
     annotationProcessor deps.glide.compiler
 
-    //apollo recently we use event_bus
+    //apollo now we use apollo from local
+    implementation project(path:':apollo_core')
+    annotationProcessor project(path:':apollo_processor')
 //    api deps.apollo.core
 //    annotationProcessor deps.apollo.compiler
 
@@ -103,8 +105,8 @@ dependencies {
     annotationProcessor deps.arouter.compiler
 
     //event_bus
-    api deps.event_bus.api
-    annotationProcessor deps.event_bus.compiler
+//    api deps.event_bus.api
+//    annotationProcessor deps.event_bus.compiler
 
 }
 

@@ -1,10 +1,7 @@
 package com.zfl.recipe_mvvm;
 
-import com.recipe_mvvm.zfl.RecipeFavorIndex;
-import com.recipe_mvvm.zfl.RecipeIndex;
+import com.lsxiao.apollo.core.Apollo;
 import com.recipe_mvvm.zfl.lib_base.BaseApplication;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class RecipeApplication extends BaseApplication
 {
@@ -12,10 +9,8 @@ public class RecipeApplication extends BaseApplication
     public void onCreate()
     {
         super.onCreate();
-        //初始化EventBus的Index
-        EventBus.builder()
-                .addIndex(new RecipeIndex())
-                .addIndex(new RecipeFavorIndex())
-                .installDefaultEventBus();
+        //给Apollo加入BinderGeneratorImpl
+        Apollo.addApolloBinderGeneratorImpl("ApolloBinderGenerator_module_recipe_Impl");
+        Apollo.addApolloBinderGeneratorImpl("ApolloBinderGenerator_module_recipe_favor_Impl");
     }
 }

@@ -1,1 +1,1 @@
-include ':module_recipe', ':lib_base', ':BGALibrary', ':lib_res', ':module_recipe_about', ':module_recipe_detail', ':module_recipe_favor'
+include ':module_recipe', ':lib_base', ':BGALibrary', ':lib_res', ':module_recipe_about', ':module_recipe_detail', ':module_recipe_favor', ':apollo_core', ':apollo_processor'

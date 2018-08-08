@@ -62,9 +62,4 @@ public class RecipeAboutActivity extends BaseActivity<BaseViewModel, ActivityRec
         mViewDataBinding.ctlRecipeAbout.setCollapsedTitleTextColor(Color.WHITE);
     }
 
-    @Override
-    protected boolean isNeedEventBus()
-    {
-        return false;
-    }
 }

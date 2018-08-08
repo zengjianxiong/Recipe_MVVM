@@ -57,8 +57,11 @@ dependencies {
     }
     //编译时运行处理声明
 //    annotationProcessor deps.apollo.compiler //now we use event_bus
+    //apollo now we use apollo from local
+    implementation project(path:':apollo_core')
+    annotationProcessor project(path:':apollo_processor')
     annotationProcessor deps.arouter.compiler
     annotationProcessor deps.lifecycle.compiler
     annotationProcessor deps.glide.compiler
-    annotationProcessor deps.event_bus.compiler
+//    annotationProcessor deps.event_bus.compiler
 }

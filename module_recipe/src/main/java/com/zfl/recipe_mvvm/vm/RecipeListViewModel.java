@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.SparseArray;
 import android.widget.Toast;
 
+import com.lsxiao.apollo.core.Apollo;
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseFragment;
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseViewModel;
 import com.recipe_mvvm.zfl.lib_base.recipe_entity.RecipeInfo;
@@ -18,8 +19,6 @@ import com.recipe_mvvm.zfl.lib_res.widget.adapter.CommonRecyclerViewAdapter;
 import com.recipe_mvvm.zfl.lib_res.widget.holder.RecipeListItemHolder;
 import com.zfl.recipe_mvvm.R;
 import com.zfl.recipe_mvvm.databinding.FragmentRecipeListBinding;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -140,8 +139,8 @@ public class RecipeListViewModel extends BaseViewModel<FragmentRecipeListBinding
         //3.之前还没有发送过更新
         String mainBgUrl = getMainBgUrl();
         if (mIsVisibleToUser && mIsRefresh && (!mIsUpdateMainBgSend)) {
-            EventBus.getDefault().post(mainBgUrl);
-//            Apollo.emit(ConstantUtil.UPDATE_MAIN_BACKGROUND, mainBgUrl);
+//            EventBus.getDefault().post(mainBgUrl);
+            Apollo.emit(ConstantUtil.UPDATE_MAIN_BACKGROUND, mainBgUrl);
             mIsUpdateMainBgSend = true;
         }
     }
@@ -154,8 +153,8 @@ public class RecipeListViewModel extends BaseViewModel<FragmentRecipeListBinding
             //表示滑动到这个Fragment了，如果已经拥有数据，可以发送更新背景图的请求
             if (mRecipeList != null && mRecipeList.size() != 0 && !mIsUpdateMainBgSend) {
                 String mainBgUrl = getMainBgUrl();
-                EventBus.getDefault().post(mainBgUrl);
-//                Apollo.emit(ConstantUtil.UPDATE_MAIN_BACKGROUND, mainBgUrl);
+//                EventBus.getDefault().post(mainBgUrl);
+                Apollo.emit(ConstantUtil.UPDATE_MAIN_BACKGROUND, mainBgUrl);
                 mIsUpdateMainBgSend = true;
             }
         } else {

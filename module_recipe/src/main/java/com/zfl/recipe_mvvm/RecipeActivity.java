@@ -21,15 +21,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.lsxiao.apollo.core.annotations.Receive;
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseActivity;
 import com.recipe_mvvm.zfl.lib_base.recipe_entity.recipe.RecipeCategoryBean;
 import com.recipe_mvvm.zfl.lib_base.utils.ARouterPathUtil;
+import com.recipe_mvvm.zfl.lib_base.utils.ConstantUtil;
 import com.recipe_mvvm.zfl.lib_res.widget.CollapsingToolbarLayoutListener;
 import com.zfl.recipe_mvvm.databinding.ActivityRecipeBinding;
 import com.zfl.recipe_mvvm.vm.RecipeViewModel;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,12 +155,6 @@ public class RecipeActivity extends BaseActivity<RecipeViewModel, ActivityRecipe
 
     }
 
-    @Override
-    protected boolean isNeedEventBus()
-    {
-        return true;
-    }
-
     private void showOrHideAppBarLayoutBg(final boolean show)
     {
         if (mIsAppBarLayoutBgShow == show)
@@ -215,11 +208,11 @@ public class RecipeActivity extends BaseActivity<RecipeViewModel, ActivityRecipe
     }
 
     /**
-     * 使用event_bus接收信息，进行图片背景更新
+     * 使用Apollo接收信息，进行图片背景更新
      * 使用mvvm的模式(bindingAdapter)进行更新，非常麻烦，所以直接进行更新
      * @param bgUrl
      */
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Receive(ConstantUtil.UPDATE_MAIN_BACKGROUND)
     public void receiveUpdateMainBg(final String bgUrl) {
         if (bgUrl.equals(mBgUrl)) return;
         mViewDataBinding.includeRecipeContent.ivRecipeLoading.setVisibility(View.VISIBLE);

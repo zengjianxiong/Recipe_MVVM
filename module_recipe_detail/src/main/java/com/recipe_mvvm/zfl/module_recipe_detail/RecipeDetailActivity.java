@@ -74,9 +74,4 @@ public class RecipeDetailActivity extends BaseActivity<RecipeDetailViewModel, Ac
         mViewDataBinding.ivRecipeCollect.setOutlineProvider(viewOutlineProvider);
     }
 
-    @Override
-    protected boolean isNeedEventBus()
-    {
-        return false;
-    }
 }

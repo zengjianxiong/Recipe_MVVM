@@ -11,7 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Toast;
 
-import com.recipe_mvvm.zfl.lib_base.event_bus_msg_entity.UpdateListEvent;
+import com.lsxiao.apollo.core.Apollo;
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseViewModel;
 import com.recipe_mvvm.zfl.lib_base.recipe_entity.RecipeDetail;
 import com.recipe_mvvm.zfl.lib_base.recipe_entity.RecipeFavorBean;
@@ -23,8 +23,6 @@ import com.recipe_mvvm.zfl.module_recipe_detail.R;
 import com.recipe_mvvm.zfl.module_recipe_detail.databinding.ActivityRecipeDetailBinding;
 import com.recipe_mvvm.zfl.module_recipe_detail.fragment.RecipeDetailMainFragment;
 import com.recipe_mvvm.zfl.module_recipe_detail.fragment.RecipeDetailMethodFragment;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -190,8 +188,8 @@ public class RecipeDetailViewModel extends BaseViewModel<ActivityRecipeDetailBin
         mIsFavor = true;
         showFavorIcon(mIsFavor);
         //发送收藏菜谱列表更新的通知
-//        Apollo.emit(ConstantUtil.FAVOR_RECIPE_LIST_UPDATE);
-        EventBus.getDefault().post(new UpdateListEvent());
+        Apollo.emit(ConstantUtil.FAVOR_RECIPE_LIST_UPDATE);
+//        EventBus.getDefault().post(new UpdateListEvent());
     }
 
 
@@ -204,8 +202,8 @@ public class RecipeDetailViewModel extends BaseViewModel<ActivityRecipeDetailBin
         mIsFavor = false;
         showFavorIcon(mIsFavor);
         //发送收藏菜谱列表更新的通知
-//        Apollo.emit(ConstantUtil.FAVOR_RECIPE_LIST_UPDATE);
-        EventBus.getDefault().post(new UpdateListEvent());
+        Apollo.emit(ConstantUtil.FAVOR_RECIPE_LIST_UPDATE);
+//        EventBus.getDefault().post(new UpdateListEvent());
     }
 
     public void isFavorRecipe(RecipeFavorBean bean)
