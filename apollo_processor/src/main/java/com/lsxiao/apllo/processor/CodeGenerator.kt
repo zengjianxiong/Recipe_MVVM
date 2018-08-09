@@ -28,7 +28,7 @@ import javax.lang.model.type.TypeMirror
  * zhihu:https://zhihu.com/people/lsxiao
  */
 
-class CodeGenerator private constructor(private val apolloDescriptors: ArrayList<ApolloDescriptor>, private val mFiler: Filer, private val modelName: String) {
+class CodeGenerator private constructor(private val apolloDescriptors: ArrayList<ApolloDescriptor>, private val mFiler: Filer, private val className: String) {
 
     companion object {
         private val GENERATE_PACKAGE_NAME = "com.lsxiao.apollo.generate"
@@ -46,7 +46,7 @@ class CodeGenerator private constructor(private val apolloDescriptors: ArrayList
         fun create(apolloDescriptors: ArrayList<ApolloDescriptor>, filer: Filer, modelName: String): CodeGenerator = CodeGenerator(apolloDescriptors, filer, modelName)
     }
     //生成不同的实例供Apollo调用
-    private var GENERATE_CLASS_NAME = "ApolloBinderGenerator_" + modelName + "_Impl"
+    private var GENERATE_CLASS_NAME = className
 
     fun generate() = createJavaFile()
 

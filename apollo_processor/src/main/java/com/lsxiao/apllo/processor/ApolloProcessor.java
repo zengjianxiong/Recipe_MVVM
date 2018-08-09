@@ -20,17 +20,17 @@ import javax.annotation.processing.SupportedOptions;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 
-import static com.lsxiao.apllo.processor.ApolloProcessor.KEY_MODULE_NAME;
+import static com.lsxiao.apllo.processor.ApolloProcessor.KEY_APOLLO_CLASS_NAME;
 
-@SupportedOptions(KEY_MODULE_NAME)
+@SupportedOptions(KEY_APOLLO_CLASS_NAME)
 @AutoService(Processor.class)
 public class ApolloProcessor extends BasicAnnotationProcessor {
     public static Map<Element, ApolloDescriptor> sDescriptorMap = new HashMap<>();
     private boolean mGenerated = false;
 
-    public static final String KEY_MODULE_NAME = "moduleName";
+    public static final String KEY_APOLLO_CLASS_NAME = "apolloClassName";
 
-    private String mModuleName;
+    private String mClassName;
 
     @Override
     protected Iterable<? extends ProcessingStep> initSteps() {
@@ -53,14 +53,13 @@ public class ApolloProcessor extends BasicAnnotationProcessor {
         // Attempt to get user configuration [moduleName]
         Map<String, String> options = processingEnv.getOptions();
         if (options == null || options.isEmpty()) {
-            throw new RuntimeException("Apollo::Compiler >>> No module name, for more information, look at gradle log.");
+            throw new RuntimeException("Apollo::Compiler >>> No generate class name, for more information, look at gradle log.");
         }
-        mModuleName = options.get(KEY_MODULE_NAME);
-        if (mModuleName == null || mModuleName.length() == 0) {
-            throw new RuntimeException("Apollo::Compiler >>> No module name, for more information, look at gradle log.");
+        mClassName = options.get(KEY_APOLLO_CLASS_NAME);
+        if (mClassName == null || mClassName.length() == 0) {
+            throw new RuntimeException("Apollo::Compiler >>> No generate class name, for more information, look at gradle log.");
         }
-        mModuleName = mModuleName.replaceAll("[^0-9a-zA-Z_]+", "");
-        CodeGenerator.Companion.create(new ArrayList<>(sDescriptorMap.values()), processingEnv.getFiler(), mModuleName).generate();
+        CodeGenerator.Companion.create(new ArrayList<>(sDescriptorMap.values()), processingEnv.getFiler(), mClassName).generate();
         mGenerated = true;
     }
 

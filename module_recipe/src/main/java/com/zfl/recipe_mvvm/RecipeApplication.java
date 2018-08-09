@@ -1,6 +1,8 @@
 package com.zfl.recipe_mvvm;
 
 import com.lsxiao.apollo.core.Apollo;
+import com.lsxiao.apollo.generate.RecipeFavorGeneratorImpl;
+import com.lsxiao.apollo.generate.RecipeGeneratorImpl;
 import com.recipe_mvvm.zfl.lib_base.BaseApplication;
 
 public class RecipeApplication extends BaseApplication
@@ -10,7 +12,7 @@ public class RecipeApplication extends BaseApplication
     {
         super.onCreate();
         //给Apollo加入BinderGeneratorImpl
-        Apollo.addApolloBinderGeneratorImpl("ApolloBinderGenerator_module_recipe_Impl");
-        Apollo.addApolloBinderGeneratorImpl("ApolloBinderGenerator_module_recipe_favor_Impl");
+        Apollo.addApolloBinderGeneratorImpl(RecipeGeneratorImpl.instance());
+        Apollo.addApolloBinderGeneratorImpl(RecipeFavorGeneratorImpl.instance());
     }
 }

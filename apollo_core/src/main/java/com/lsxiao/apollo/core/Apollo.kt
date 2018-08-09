@@ -105,24 +105,16 @@ class Apollo private constructor() {
          * 生成类后使用，这样就能传递信息了
          */
         @JvmStatic
-        fun addApolloBinderGeneratorImpl(className: String) {
+        fun addApolloBinderGeneratorImpl(generator: ApolloBinderGenerator) {
             //now we add ApolloBinderGenerator manually
-            val fullClassName = "com.lsxiao.apollo.generate." + className
-            try {
-                val generatorImplClass = Class.forName(fullClassName) as Class<ApolloBinderGenerator>
-                val staticInstanceMethod = generatorImplClass.getMethod("instance")
-                val generator = staticInstanceMethod.invoke(null) as ApolloBinderGenerator
-                //加入列表
-                Apollo.get().mApolloBinderGeneratorList.add(generator)
-                //将字符串连接起来，放入map，然后用于绑定
-                if (!generator.getInvokeClass().isNullOrBlank()) {
-                    var strList : MutableList<String> = ArrayList()
-                    strList.addAll(generator.getInvokeClass().split(","))
-                    strList.remove("")
-                    Apollo.get().mInvokeClassesMap.put(generator, strList)
-                }
-            } catch (e: ClassNotFoundException) {
-                Apollo.get().mIsApolloBinderClassNotFound = true
+            //加入列表
+            Apollo.get().mApolloBinderGeneratorList.add(generator)
+            //将字符串连接起来，放入map，然后用于绑定
+            if (!generator.getInvokeClass().isNullOrBlank()) {
+                var strList : MutableList<String> = ArrayList()
+                strList.addAll(generator.getInvokeClass().split(","))
+                strList.remove("")
+                Apollo.get().mInvokeClassesMap.put(generator, strList)
             }
         }
 
