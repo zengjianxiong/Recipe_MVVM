@@ -23,8 +23,6 @@ versions.kotlin = "1.2.21"
 versions.javapoet = "1.8.0"
 versions.autoService = "1.0-rc4"
 versions.autoCommon = "0.9"
-versions.event_bus = "3.1.1"
-versions.event_bus_processor = "3.1.1"
 versions.alibaba_arouter_api = "1.3.1"
 versions.alibaba_arouter_compiler = "1.1.4"
 versions.apt = "1.8"
@@ -71,11 +69,6 @@ retrofit.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:
 retrofit.okhttp = "com.squareup.okhttp3:okhttp:$versions.okhttp"
 deps.retrofit = retrofit
 
-
-def event_bus = [:]
-event_bus.api = "org.greenrobot:eventbus:$versions.event_bus"
-event_bus.compiler = "org.greenrobot:eventbus-annotation-processor:$versions.event_bus_processor"
-deps.event_bus = event_bus
 
 def arouter = [:]
 arouter.api = "com.alibaba:arouter-api:$versions.alibaba_arouter_api"
