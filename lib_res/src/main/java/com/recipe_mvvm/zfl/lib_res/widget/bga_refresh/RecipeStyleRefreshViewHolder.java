@@ -84,8 +84,8 @@ public class RecipeStyleRefreshViewHolder extends BGARefreshViewHolder implement
         if (mRefreshHeaderView == null) {
 
             mRefreshHeaderView = View.inflate(mContext, R.layout.header_recipe_refresh, null);
-            mIvHeaderIcon = (ImageView) mRefreshHeaderView.findViewById(R.id.ivRefreshHeaderIcon);
-            mTvHeaderStatus = (TextView) mRefreshHeaderView.findViewById(R.id.tvRefreshHeaderStatus);
+            mIvHeaderIcon = mRefreshHeaderView.findViewById(R.id.ivRefreshHeaderIcon);
+            mTvHeaderStatus = mRefreshHeaderView.findViewById(R.id.tvRefreshHeaderStatus);
             initRefreshAnim();
         }
         return mRefreshHeaderView;
@@ -96,8 +96,8 @@ public class RecipeStyleRefreshViewHolder extends BGARefreshViewHolder implement
     {
         if (mLoadMoreFooterView == null) {
             mLoadMoreFooterView = View.inflate(mContext, R.layout.footer_recipe_loadmore, null);
-            mIvFooterIcon = (ImageView) mLoadMoreFooterView.findViewById(R.id.ivRefreshFooterIcon);
-            mTvFooterStatus = (TextView) mLoadMoreFooterView.findViewById(R.id.tvRefreshFooterStatus);
+            mIvFooterIcon = mLoadMoreFooterView.findViewById(R.id.ivRefreshFooterIcon);
+            mTvFooterStatus = mLoadMoreFooterView.findViewById(R.id.tvRefreshFooterStatus);
             initLoadMoreAnim();
         }
         return mLoadMoreFooterView;

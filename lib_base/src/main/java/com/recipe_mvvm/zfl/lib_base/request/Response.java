@@ -45,61 +45,46 @@ public class Response
 
     private void initConsumer()
     {
-        response = new Consumer<ResponseBody>()
-        {
-            @Override
-            public void accept(ResponseBody responseBody) throws Exception
+        //lambda 语法
+        response = (responseBody) -> {
+            try
             {
-                try
-                {
-                    String json = responseBody.string();
-//                    LogUtil.e(json);
-                    if (JsonUtil.checkResult(json)) {
-                        //请求成功
-                        //进行数据解析，并且将具体数据通过反射机制返回给viewModel
-                        MethodUtil.getMethod(viewModel, viewModel.getInvokeCallBackMap().get(clazz), clazz).invoke(viewModel, gson.fromJson(json, clazz));
-                    } else {
-                        //请求失败
-                        viewModel.error(JsonUtil.getMessage(json), JsonUtil.getCode(json));
-                    }
-                } catch (Exception e)
-                {
-                    e.printStackTrace();
-                    viewModel.error("反正又特么出错了:" + e.getMessage(), -1);
-                } finally
-                {
-                    viewModel.hideLoading();
-                }
-            }
-        };
-
-        throwable = new Consumer<Throwable>()
-        {
-            @Override
-            public void accept(Throwable throwable) throws Exception
-            {
-                if (throwable instanceof HttpException) {
-                    HttpException exception = (HttpException) throwable;
-                    int code = exception.code();
-                    wrongMsg = exception.getMessage();
-                    //后续会添加错误码的具体判断
-                    viewModel.error(wrongMsg, code);
+                String json = responseBody.string();
+                //                    LogUtil.e(json);
+                if (JsonUtil.checkResult(json)) {
+                    //请求成功
+                    //进行数据解析，并且将具体数据通过反射机制返回给viewModel
+                    MethodUtil.getMethod(viewModel, viewModel.getInvokeCallBackMap().get(clazz), clazz).invoke(viewModel, gson.fromJson(json, clazz));
                 } else {
-                    viewModel.error(throwable.getMessage(), -1);
+                    //请求失败
+                    viewModel.error(JsonUtil.getMessage(json), JsonUtil.getCode(json));
                 }
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+                viewModel.error("反正又特么出错了:" + e.getMessage(), -1);
+            } finally
+            {
                 viewModel.hideLoading();
             }
         };
-
-        complete = new Action()
-        {
-            @Override
-            public void run() throws Exception
-            {
-                //now we do nothing
-                LogUtil.v("complete");
+        //lambda 语法
+        throwable = (throwable) -> {
+            if (throwable instanceof HttpException) {
+                HttpException exception = (HttpException) throwable;
+                int code = exception.code();
+                wrongMsg = exception.getMessage();
+                //后续会添加错误码的具体判断
+                viewModel.error(wrongMsg, code);
+            } else {
+                viewModel.error(throwable.getMessage(), -1);
             }
+            viewModel.hideLoading();
         };
+
+        //lambda 语法
+        complete = () -> LogUtil.v("complete");
+
     }
 
     public Consumer<ResponseBody> getResponse()

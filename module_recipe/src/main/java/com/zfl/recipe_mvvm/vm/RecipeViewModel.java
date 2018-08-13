@@ -2,8 +2,6 @@ package com.zfl.recipe_mvvm.vm;
 
 
 import android.app.ProgressDialog;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -97,24 +95,18 @@ public class RecipeViewModel extends BaseViewModel<ActivityRecipeBinding>
     }
 
     public void updateCategory(RecipeCategoryBean bean) {
-        viewDataBinding.nvRecipeCategory.setNavigationItemSelectedListener(new NavigationView
-                .OnNavigationItemSelectedListener()
-
-        {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+        //lambda
+        viewDataBinding.nvRecipeCategory.setNavigationItemSelectedListener((item -> {
+            if (null != mPreMenuItem)
             {
-                if (null != mPreMenuItem)
-                {
-                    mPreMenuItem.setChecked(false);
-                }
-                item.setChecked(true);
-                mPreMenuItem = item;
-                viewDataBinding.dlRecipe.closeDrawers();
-                updateRecipeListFrg(item.getItemId());
-                return false;
+                mPreMenuItem.setChecked(false);
             }
-        });
+            item.setChecked(true);
+            mPreMenuItem = item;
+            viewDataBinding.dlRecipe.closeDrawers();
+            updateRecipeListFrg(item.getItemId());
+            return false;
+        }));
         mMenuIconResPositions.clear();
         mCategoryBean = bean;
         List<Integer> menuIconRes = RandomUtil.random(MenuIconRes, mCategoryBean.result.childs

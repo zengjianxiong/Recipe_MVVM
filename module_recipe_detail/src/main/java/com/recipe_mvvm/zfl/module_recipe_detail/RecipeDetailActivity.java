@@ -53,14 +53,8 @@ public class RecipeDetailActivity extends BaseActivity<RecipeDetailViewModel, Ac
 
         setSupportActionBar(mViewDataBinding.tbRecipeDetail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mViewDataBinding.tbRecipeDetail.setNavigationOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                onBackPressed();
-            }
-        });
+        //lambda
+        mViewDataBinding.tbRecipeDetail.setNavigationOnClickListener((v) -> onBackPressed());
 
         ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider()
         {

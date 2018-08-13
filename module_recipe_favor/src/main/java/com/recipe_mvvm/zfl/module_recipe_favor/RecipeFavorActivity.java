@@ -1,7 +1,6 @@
 package com.recipe_mvvm.zfl.module_recipe_favor;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lsxiao.apollo.core.annotations.Receive;
@@ -52,12 +51,8 @@ public class RecipeFavorActivity extends BaseActivity<RecipeFavorViewModel, Acti
         mViewDataBinding.tbRecipeFavor.setTitle("收藏菜谱");
         setSupportActionBar(mViewDataBinding.tbRecipeFavor);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mViewDataBinding.tbRecipeFavor.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        //lambda 语法
+        mViewDataBinding.tbRecipeFavor.setNavigationOnClickListener((v) -> onBackPressed());
 
         mViewDataBinding.bgaRlFavorRecipe.setDelegate(mViewModel);
         //不能上拉加载更多

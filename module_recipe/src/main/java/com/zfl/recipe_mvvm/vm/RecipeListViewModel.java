@@ -26,7 +26,6 @@ import java.util.Map;
 
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 
 /**
  * @Description 处理recipeListFragment的数据与界面的逻辑
@@ -218,14 +217,10 @@ public class RecipeListViewModel extends BaseViewModel<FragmentRecipeListBinding
         mIsRefresh = true;
         mCurPage = 1;
         if (mIsLazyLoad) {
-            viewDataBinding.bgaRlRecipe.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    get(ApiUtil.URL_RECIPE_LIST, RecipeListBean.class, true, false);
-                }
-            }, 1500);//延迟1.5秒（至少让用户能看见完整的动画啊）
+            //延迟1.5秒（至少让用户能看见完整的动画啊）
+            //lambda
+            viewDataBinding.bgaRlRecipe.postDelayed(() ->
+                    get(ApiUtil.URL_RECIPE_LIST, RecipeListBean.class, true, false), 1500);
         } else {
             get(ApiUtil.URL_RECIPE_LIST, RecipeListBean.class, true, false);
         }
@@ -272,18 +267,14 @@ public class RecipeListViewModel extends BaseViewModel<FragmentRecipeListBinding
     @Override
     public void emitter(Observable<Object> observable)
     {
-        observable.subscribe(new Consumer<Object>()
-        {
-            @Override
-            public void accept(Object o) throws Exception
-            {
-                if (o instanceof Map) {
-                    Map map = (Map) o;
-                    int position = Integer.parseInt(map.get("position").toString());
-                    Toast.makeText(viewDataBinding.getRoot().getContext(), "position:" + position + " 你点击了" + mRecipeList.get(position).name + "的图片!", Toast.LENGTH_SHORT).show();
-                }
+        //lambda
+        observable.subscribe((o -> {
+            if (o instanceof Map) {
+                Map map = (Map) o;
+                int position = Integer.parseInt(map.get("position").toString());
+                Toast.makeText(viewDataBinding.getRoot().getContext(), "position:" + position + " 你点击了" + mRecipeList.get(position).name + "的图片!", Toast.LENGTH_SHORT).show();
             }
-        });
+        }));
     }
 
 

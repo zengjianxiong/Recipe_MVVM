@@ -2,7 +2,6 @@ package com.recipe_mvvm.zfl.module_recipe_about;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.recipe_mvvm.zfl.lib_base.mvvm.BaseActivity;
@@ -44,14 +43,8 @@ public class RecipeAboutActivity extends BaseActivity<BaseViewModel, ActivityRec
         setSupportActionBar(mViewDataBinding.tbRecipeAbout);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mViewDataBinding.tbRecipeAbout.setNavigationOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                onBackPressed();
-            }
-        });
+        //lambda
+        mViewDataBinding.tbRecipeAbout.setNavigationOnClickListener((v) -> onBackPressed());
         mViewDataBinding.ctlRecipeAbout.setTitle("关于Recipe");
         mViewDataBinding.ctlRecipeAbout.setContentScrimColor(mContext.getResources().getColor(R.color.colorPrimary));
         mViewDataBinding.ctlRecipeAbout.setStatusBarScrimColor(mContext.getResources().getColor(R.color

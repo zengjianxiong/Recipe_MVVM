@@ -22,7 +22,6 @@ import java.util.Map;
 
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 
 public class RecipeFavorViewModel extends BaseViewModel<ActivityRecipeFavorBinding> implements BGARefreshLayout.BGARefreshLayoutDelegate,
         CommonRecyclerViewAdapter.AdapterTemplate, CommonRecyclerViewAdapter.AdapterEmitter
@@ -111,14 +110,9 @@ public class RecipeFavorViewModel extends BaseViewModel<ActivityRecipeFavorBindi
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout)
     {
         if (mIsLazyLoad) {
-            refreshLayout.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    get(ApiUtil.URL_GET_FAVOR_RECIPE_LIST, RecipeListBean.class, false, false);
-                }
-            }, 1500);//延迟1.5秒（至少让用户能看见完整的动画啊）
+            //lambda 语法
+            refreshLayout.postDelayed(() ->
+                    get(ApiUtil.URL_GET_FAVOR_RECIPE_LIST, RecipeListBean.class, false, false), 1500); //延迟1.5秒（至少让用户能看见完整的动画啊）
         } else {
             get(ApiUtil.URL_GET_FAVOR_RECIPE_LIST, RecipeListBean.class, false, false);
         }
@@ -158,16 +152,12 @@ public class RecipeFavorViewModel extends BaseViewModel<ActivityRecipeFavorBindi
     @Override
     public void emitter(Observable<Object> observable)
     {
-        observable.subscribe(new Consumer<Object>()
-        {
-            @Override
-            public void accept(Object o) throws Exception
-            {
-                if (o instanceof Map) {
-                    Map map = (Map) o;
-                    int position = Integer.parseInt(map.get("position").toString());
-                    Toast.makeText(viewDataBinding.getRoot().getContext(), "position:" + position + " 你点击了" + mList.get(position).name + "的图片!", Toast.LENGTH_SHORT).show();
-                }
+        //lambda语法
+        observable.subscribe((o) -> {
+            if (o instanceof Map) {
+                Map map = (Map) o;
+                int position = Integer.parseInt(map.get("position").toString());
+                Toast.makeText(viewDataBinding.getRoot().getContext(), "position:" + position + " 你点击了" + mList.get(position).name + "的图片!", Toast.LENGTH_SHORT).show();
             }
         });
     }

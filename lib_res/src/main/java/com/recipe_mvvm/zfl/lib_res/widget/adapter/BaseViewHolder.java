@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.annotations.NonNull;
 
 /**
  * @Description
@@ -36,15 +34,9 @@ public abstract class BaseViewHolder<T, VB extends ViewDataBinding> extends Recy
      * 因为根view的点击处理事件也在这里进行，所以必须初始化
      */
     protected void createObservable(){
+        //lambda 语法
+        observable = Observable.create((obEmitter) -> emi = obEmitter);
 
-        observable = Observable.create(new ObservableOnSubscribe<Object>()
-        {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Object> emitter) throws Exception
-            {
-                emi = emitter;
-            }
-        });
     }
 
     public  Observable<Object> getObservable(){
